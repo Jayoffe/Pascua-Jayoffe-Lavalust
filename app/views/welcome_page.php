@@ -561,7 +561,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 <nav>
     <a class="nav-logo" href="#">
         <div class="flame">🔥</div>
-        LavaLust
+        Hallo & Welcome to LavaLust
     </a>
     <div class="nav-links">
         <a href="https://lavalust.netlify.app/docs/" target="_blank">Docs</a>
