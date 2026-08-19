@@ -166,8 +166,8 @@
         <div class="nav-container">
             <div class="logo">Lava<span>Lust</span></div>
             <div class="nav-links">
-                <a href="<?=site_url('student');?>" class="active">Home</a>
-                <a href="<?=site_url('student/profile');?>">Profile</a>
+                <a href="<?=site_url('');?>" class="active">Home</a>
+                <a href="<?=site_url('profile');?>">Profile</a>
             </div>
         </div>
     </nav>

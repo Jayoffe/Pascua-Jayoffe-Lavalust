@@ -208,8 +208,8 @@
         <div class="nav-container">
             <div class="logo">Lava<span>Lust</span></div>
             <div class="nav-links">
-                <a href="<?=site_url('student');?>">Home</a>
-                <a href="<?=site_url('student/profile');?>" class="active">Profile</a>
+                <a href="<?=site_url('');?>">Home</a>
+                <a href="<?=site_url('profile');?>" class="active">Profile</a>
             </div>
         </div>
     </nav>
