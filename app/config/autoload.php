@@ -82,7 +82,7 @@ $autoload['libraries'] = array();
 |
 |	$autoload['helpers'] = array('url', 'file');
 */
-$autoload['helpers'] = array();
+$autoload['helpers'] = array('url');
 
 /*
 | -------------------------------------------------------------------
@@ -107,4 +107,5 @@ $autoload['models'] = array();
 |
 */
 $autoload['configs'] = array();
+
 ?>
