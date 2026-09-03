@@ -46,3 +46,5 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
 $router->get('/', 'StudentController::index', ['middleware' => 'StudentMiddleware']);
 $router->get('/profile', 'StudentController::profile', ['middleware' => 'StudentMiddleware']);
+
+$router->get('/show-users', 'UserController::showUsers');
