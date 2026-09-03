@@ -58,7 +58,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 */
 
 $database['main'] = array(
-    'driver'    => getenv('DB_DRIVER') ?: 'mysql',
+    'driver'    => getenv('DB_DRIVER') ?: '',
     'hostname'  => getenv('DB_HOST') ?: '',
     'port'      => getenv('DB_PORT') ?: '',
     'username'  => getenv('DB_USERNAME') ?: '',
