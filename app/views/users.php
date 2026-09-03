@@ -222,7 +222,7 @@
         <section class="page-header">
             <div class="category-tag">Database Records</div>
             <h1>User Management Directory</h1>
-            <p class="subtitle">Overview of dynamically fetched records from your MySQL database.</p>
+            <p class="subtitle">Overview of dynamically fetched records from Aiven MySQL database.</p>
         </section>
 
         <div class="table-container">
