@@ -3,272 +3,774 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Directory — LavaLust</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Student List - Academic Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --bg-body: #f8fafc;
+            --surface: #ffffff;
+            --sidebar-bg: #09090b;
+            --sidebar-text: #f4f4f5;
+            --text-main: #18181b;
+            --text-muted: #71717a;
+            --border-color: #e4e4e7;
+            --accent-red: #dc2626;
+            --accent-red-hover: #b91c1c;
+            --accent-red-light: #fef2f2;
+            --radius: 6px;
+            --shadow-subtle: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+        }
+
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
-            line-height: 1.6;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
             min-height: 100vh;
+            line-height: 1.5;
         }
 
-        /* Navigation */
-        nav {
-            background: #0a0a0a;
-            border-bottom: 1px solid #1f1f1f;
-            padding: 0 2rem;
-            position: sticky;
+        /* SIDEBAR NAVIGATION */
+        .sidebar {
+            width: 260px;
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
             top: 0;
+            bottom: 0;
+            left: 0;
             z-index: 100;
         }
 
-        .nav-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            height: 64px;
+        .sidebar-brand {
+            padding: 1.5rem 1.25rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 0.75rem;
+            border-bottom: 1px solid #27272a;
         }
 
-        .logo {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: #ffffff;
-            letter-spacing: -0.3px;
+        .sidebar-brand i {
+            color: var(--accent-red);
         }
 
-        .logo span {
-            color: #dc2626;
+        .sidebar-nav {
+            padding: 1rem 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            flex: 1;
         }
 
-        .nav-links a {
-            text-decoration: none;
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
             color: #a1a1aa;
+            text-decoration: none;
             font-size: 0.9rem;
             font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.2s ease;
+            border-radius: var(--radius);
+            transition: all 0.15s ease;
         }
 
-        .nav-links a:hover {
+        .nav-item:hover {
+            background-color: #18181b;
             color: #ffffff;
-            background: #1f1f1f;
         }
 
-        .nav-links a.active {
-            color: #dc2626;
-            background: #1f1f1f;
+        .nav-item.active {
+            background-color: var(--accent-red-light);
+            color: var(--accent-red);
+            border-left: 3px solid var(--accent-red);
         }
 
-        /* Main Content */
-        main {
-            max-width: 1100px;
+        /* MAIN LAYOUT */
+        .main-wrapper {
+            flex: 1;
+            margin-left: 260px;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .portal-container {
+            max-width: 1400px;
+            width: 100%;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 2.5rem 2rem;
         }
 
-        /* Header Section */
+        /* PAGE HEADER */
         .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        .category-tag {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: #dc2626;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 0.75rem;
+        .header-title h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.025em;
         }
 
-        h1 {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #ffffff;
-            letter-spacing: -1px;
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
+        .header-title p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
         }
 
-        .subtitle {
-            font-size: 1rem;
-            color: #a1a1aa;
-            font-weight: 400;
-        }
-
-        /* Dark Styled Table */
-        .table-container {
-            width: 100%;
-            overflow-x: auto;
-            background: #121212;
-            border: 1px solid #1f1f1f;
-            border-radius: 12px;
-            margin-top: 1.5rem;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 0.95rem;
-        }
-
-        th {
-            background-color: #171717;
-            color: #a1a1aa;
-            font-weight: 500;
-            padding: 1rem 1.25rem;
-            border-bottom: 1px solid #1f1f1f;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.5px;
-        }
-
-        td {
-            padding: 1rem 1.25rem;
-            border-bottom: 1px solid #1f1f1f;
-            color: #e4e4e7;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr:hover td {
-            background-color: #1a1a1a;
-        }
-
-        /* Action Buttons */
-        .action-area {
-            margin-top: 2.5rem;
-        }
-
-        .btn-back {
+        .btn {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: #1f1f1f;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            border: 1px solid #27272a;
+            background-color: var(--accent-red);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.1rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: var(--radius);
             cursor: pointer;
-            transition: all 0.25s ease;
+            text-decoration: none;
+            transition: background-color 0.15s ease;
         }
 
-        .btn-back:hover {
-            background: #27272a;
+        .btn:hover {
+            background-color: var(--accent-red-hover);
+        }
+
+        .btn-outline {
+            background-color: var(--surface);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--bg-body);
+            border-color: var(--text-muted);
+        }
+
+        /* SUMMARY CARDS */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-subtle);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .summary-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius);
+            background-color: var(--accent-red-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-red);
+            font-size: 1.1rem;
+        }
+
+        .summary-content .card-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .summary-content .card-value {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--accent-red);
+            margin-top: 0.1rem;
+        }
+
+        /* SEARCH AND FILTER TOOLBAR */
+        .toolbar {
+            background-color: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .search-group {
+            position: relative;
+            flex: 1;
+            min-width: 260px;
+        }
+
+        .search-group i {
+            position: absolute;
+            left: 0.9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            transition: color 0.15s ease;
+        }
+
+        .search-group input {
+            width: 100%;
+            padding: 0.55rem 0.75rem 0.55rem 2.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            outline: none;
+            color: var(--text-main);
+            background-color: var(--surface);
+            transition: border-color 0.15s ease;
+        }
+
+        .search-group input:focus {
+            border-color: var(--accent-red);
+        }
+
+        .search-group input:focus + i {
+            color: var(--accent-red);
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 0.55rem 0.85rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            background-color: var(--surface);
+            color: var(--text-main);
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.15s ease;
+        }
+
+        .filter-select:focus {
+            border-color: var(--accent-red);
+        }
+
+        /* CONTENT CONTAINER & TABLE */
+        .content-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-subtle);
+            overflow: hidden;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .student-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .student-table th {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-weight: 700;
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .student-table td {
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+            vertical-align: middle;
+        }
+
+        .student-table tbody tr {
+            transition: background-color 0.1s ease;
+        }
+
+        .student-table tbody tr:hover {
+            background-color: var(--bg-body);
+        }
+
+        .student-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* IDENTITY PROFILE ELEMENTS */
+        .student-profile-cell {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .student-info .name {
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .student-info .id-muted {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-active {
+            background-color: var(--accent-red-light);
+            color: var(--accent-red);
+        }
+
+        .text-muted {
+            color: var(--text-muted);
+        }
+
+        /* ACTIONS */
+        .actions-cell {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-icon {
+            background: none;
+            border: 1px solid var(--border-color);
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-icon:hover {
+            background-color: var(--text-main);
             color: #ffffff;
-            border-color: #3f3f46;
-            transform: translateY(-2px);
+            border-color: var(--text-main);
         }
 
-        .btn-back svg {
-            width: 18px;
-            height: 18px;
+        .btn-icon.delete:hover {
+            background-color: var(--accent-red);
+            color: #ffffff;
+            border-color: var(--accent-red);
         }
 
-        /* Footer */
-        .footer-note {
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid #1f1f1f;
-            color: #52525b;
+        /* MOBILE CARDS (Hidden on Desktop) */
+        .mobile-cards {
+            display: none;
+            padding: 1rem;
+            gap: 1rem;
+            flex-direction: column;
+        }
+
+        .mobile-card {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .mobile-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-card-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
             font-size: 0.85rem;
         }
 
-        /* Responsive */
-        @media (max-width: 640px) {
-            h1 {
-                font-size: 1.6rem;
+        .mobile-card-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 0.75rem;
+        }
+
+        /* EMPTY STATE */
+        .empty-state {
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .empty-state i {
+            font-size: 2.5rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .empty-state p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* PAGINATION */
+        .pagination-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.85rem 1.25rem;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--surface);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 0.35rem;
+        }
+
+        .page-btn {
+            padding: 0.35rem 0.65rem;
+            border: 1px solid var(--border-color);
+            background: var(--surface);
+            color: var(--text-main);
+            border-radius: var(--radius);
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .page-btn.active {
+            background-color: var(--accent-red);
+            color: white;
+            border-color: var(--accent-red);
+        }
+
+        .page-btn:hover:not(.active) {
+            background-color: var(--bg-body);
+        }
+
+        /* RESPONSIVE MEDIA QUERIES */
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 70px;
             }
-            main {
-                padding: 2.5rem 1.25rem;
+            .sidebar-brand span, .nav-item span {
+                display: none;
             }
-            th, td {
-                padding: 0.75rem 1rem;
+            .main-wrapper {
+                margin-left: 70px;
+            }
+            .table-responsive {
+                display: none;
+            }
+            .mobile-cards {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sidebar {
+                display: none;
+            }
+            .main-wrapper {
+                margin-left: 0;
+            }
+            .portal-container {
+                padding: 1.25rem 1rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="nav-container">
-            <div class="logo">Lava<span>Lust</span></div>
-            <div class="nav-links">
-                <a href="<?=site_url('');?>">Home</a>
-                <a href="<?=site_url('profile');?>">Profile</a>
-                <a href="<?=site_url('show-users');?>" class="active">Users</a>
-            </div>
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Academia Portal</span>
         </div>
-    </nav>
-
-    <main>
-        <section class="page-header">
-            <div class="category-tag">Database Records</div>
-            <h1>User Management Directory</h1>
-            <p class="subtitle">Overview of dynamically fetched records from Aiven MySQL database.</p>
-        </section>
-
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Username</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if(!empty($users)): ?>
-                        <?php foreach($users as $user): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($user['id']); ?></td>
-                                <td><?= htmlspecialchars($user['firstname']); ?></td>
-                                <td><?= htmlspecialchars($user['lastname']); ?></td>
-                                <td><?= htmlspecialchars($user['email']); ?></td>
-                                <td><?= htmlspecialchars($user['username']); ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="5" style="text-align: center; color: #71717a;">No users found in database.</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
-
-        <section class="action-area">
-            <a href="<?=site_url('');?>" class="btn-back">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-                </svg>
-                Back to Home
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
             </a>
-        </section>
+            <a href="#" class="nav-item active">
+                <i class="fa-solid fa-user-graduate"></i>
+                <span>Students</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>Add Student</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-book"></i>
+                <span>Courses</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+    </aside>
 
-        <div class="footer-note">
-            LavaLust Student Portal
+    <!-- MAIN WRAPPER -->
+    <div class="main-wrapper">
+        <div class="portal-container">
+
+            <!-- PAGE HEADER -->
+            <header class="page-header">
+                <div class="header-title">
+                    <h1>Student List</h1>
+                    <p>View and manage registered students.</p>
+                </div>
+                <button class="btn">
+                    <i class="fa-solid fa-plus"></i> Add Student
+                </button>
+            </header>
+
+            <!-- SUMMARY CARDS -->
+            <section class="summary-grid">
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fa-solid fa-users"></i></div>
+                    <div class="summary-content">
+                        <div class="card-title">Total Students</div>
+                        <div class="card-value">1,248</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fa-solid fa-user-check"></i></div>
+                    <div class="summary-content">
+                        <div class="card-title">Active Students</div>
+                        <div class="card-value">1,190</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fa-solid fa-book-open"></i></div>
+                    <div class="summary-content">
+                        <div class="card-title">Courses</div>
+                        <div class="card-value">14</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <div class="summary-content">
+                        <div class="card-title">Year Levels</div>
+                        <div class="card-value">4</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEARCH AND FILTER TOOLBAR -->
+            <div class="toolbar">
+                <div class="search-group">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search by name or student ID...">
+                </div>
+                <div class="filter-group">
+                    <select class="filter-select">
+                        <option value="">All Courses</option>
+                        <option value="BSCS">BS Computer Science</option>
+                        <option value="BSIT">BS Information Technology</option>
+                    </select>
+                    <select class="filter-select">
+                        <option value="">All Year Levels</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
+                    </select>
+                    <button class="btn btn-outline" title="Clear Filters">
+                        <i class="fa-solid fa-rotate-left"></i> Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- STUDENT TABLE CONTAINER -->
+            <div class="content-card">
+                
+                <?php if (!empty($users)): ?>
+                    <!-- Desktop Table View -->
+                    <div class="table-responsive">
+                        <table class="student-table">
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Student ID</th>
+                                    <th>Course</th>
+                                    <th>Year</th>
+                                    <th>Section</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($users as $user): ?>
+                                    <?php 
+                                        $initials = strtoupper(substr($user['username'], 0, 2));
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <div class="student-profile-cell">
+                                                <div class="avatar"><?= $initials ?: 'ST'; ?></div>
+                                                <div class="student-info">
+                                                    <div class="name"><?= htmlspecialchars($fullName ?: $user['username']); ?></div>
+                                                                                        <div class="name"><?= htmlspecialchars($user['username']); ?></div>
+                                                    <div class="id-muted">@<?= htmlspecialchars($user['username']); ?></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="text-muted">#<?= htmlspecialchars($user['id']); ?></span></td>
+                                        <td>BS Computer Science</td>
+                                        <td>3rd Year</td>
+                                        <td>Section A</td>
+                                        <td><span class="text-muted"><?= htmlspecialchars($user['role']); ?></span></td>
+                                        <td><span class="badge badge-active">Active</span></td>
+                                        <td>
+                                            <div class="actions-cell">
+                                                <button class="btn-icon" title="View Details"><i class="fa-solid fa-eye"></i></button>
+                                                <button class="btn-icon" title="Edit Student"><i class="fa-solid fa-pen"></i></button>
+                                                <button class="btn-icon delete" title="Delete Student"><i class="fa-solid fa-trash-can"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Mobile Card View -->
+                    <div class="mobile-cards">
+                        <?php foreach ($users as $user): ?>
+                            <?php 
+                                $initials = strtoupper(substr($user['username'], 0, 2));
+                            ?>
+                                                                <div class="name"><?= htmlspecialchars($user['username']); ?></div>
+                            <div class="mobile-card">
+                                <div class="mobile-card-header">
+                                    <div class="student-profile-cell">
+                                        <div class="avatar"><?= $initials ?: 'ST'; ?></div>
+                                        <div class="student-info">
+                                            <div class="name"><?= htmlspecialchars($fullName ?: $user['username']); ?></div>
+                                            <div class="id-muted">ID: #<?= htmlspecialchars($user['id']); ?></div>
+                                        </div>
+                                    </div>
+                                    <span class="badge badge-active">Active</span>
+                                </div>
+                                <div class="mobile-card-body">
+                                    <div><span class="text-muted">Course:</span> BSCS</div>
+                                    <div><span class="text-muted">Year/Sec:</span> 3rd Yr - A</div>
+                                    <div style="grid-column: span 2;"><span class="text-muted">Role:</span> <?= htmlspecialchars($user['role']); ?></div>
+                                </div>
+                                <div class="mobile-card-footer">
+                                    <button class="btn-icon" title="View Details"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn-icon" title="Edit Student"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-icon delete" title="Delete Student"><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination-footer">
+                        <div>Showing entries for registered students</div>
+                        <div class="pagination-controls">
+                            <button class="page-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="page-btn active">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+
+                <?php else: ?>
+                    <!-- Empty State -->
+                    <div class="empty-state">
+                        <i class="fa-solid fa-folder-open"></i>
+                        <h3>No students found.</h3>
+                        <p>There are no registered student entries available in the database currently.</p>
+                        <button class="btn">
+                            <i class="fa-solid fa-plus"></i> Add Student
+                        </button>
+                    </div>
+                <?php endif; ?>
+
+            </div>
+
         </div>
-    </main>
+    </div>
 
 </body>
 </html>
