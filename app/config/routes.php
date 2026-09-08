@@ -15,6 +15,7 @@ $router->get('/users', 'UserController::showUsers');
 $router->get('/', 'Welcome::index');
 
 */
+$router->any('/', 'AuthController::login');
 
 $router->any('/login', 'AuthController::login');
 $router->get('/logout', 'AuthController::logout');
