@@ -1,20 +1,10 @@
 <?php
 
-/*
-$router->get('/student', 'StudentController::index', 
-            ['middleware' => 'StudentMiddleware']);
 
-$router->get('/student/profile', 'StudentController::profile', 
-            ['middleware' => 'StudentMiddleware']);
-3rd acivity
-*/
+$router->get('/profile', 'StudentController::index', ['middleware' => 'StudentMiddleware']);
 
-/*
-4th lab activity
-$router->get('/users', 'UserController::showUsers');
-$router->get('/', 'Welcome::index');
+$router->any('/show-users', 'AuthController::login');
 
-*/
 $router->any('/', 'AuthController::login');
 
 $router->any('/login', 'AuthController::login');
