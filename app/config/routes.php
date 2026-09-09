@@ -1,12 +1,11 @@
 <?php
 
-
+//lab 3
 $router->get('/profile', 'StudentController::index', ['middleware' => 'StudentMiddleware']);
-
+//lab 4
 $router->any('/show-users', 'AuthController::login');
-
+//lab 5
 $router->any('/', 'AuthController::login');
-
 $router->any('/login', 'AuthController::login');
 $router->get('/logout', 'AuthController::logout');
 
