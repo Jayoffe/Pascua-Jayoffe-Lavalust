@@ -24,6 +24,17 @@ $router->group(['prefix' => '/api'], function ($router) {
     $router->post('/products', 'ApiController::product_create');
     $router->put('/products/{id}', 'ApiController::product_update');
     $router->delete('/products/{id}', 'ApiController::product_delete');
+
+    // Browser clients send OPTIONS before JSON requests.
+    $router->options('/login', 'ApiController::login');
+    $router->options('/register', 'ApiController::register');
+    $router->options('/logout', 'ApiController::logout');
+    $router->options('/refresh', 'ApiController::refresh');
+    $router->options('/profile', 'ApiController::profile');
+    $router->options('/users', 'ApiController::list');
+    $router->options('/users/{id}', 'ApiController::update');
+    $router->options('/products', 'ApiController::products');
+    $router->options('/products/{id}', 'ApiController::product_update');
 });
 
 // lab 6 migrations
