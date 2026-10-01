@@ -61,7 +61,7 @@ class ApiController extends Controller
             [$username, $email, password_hash($password, PASSWORD_BCRYPT), 'user']
         );
 
-        $this->api->respond(['message' => 'User registered'], 201);
+        $this->api->respond(['message' => 'User registered, finally works hays'], 201);
     }
 
     public function logout()

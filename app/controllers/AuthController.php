@@ -18,7 +18,7 @@ class AuthController extends Controller
             $password = $this->io->post('password');
             $user = $this->UserModel->find_by_username($username);
 
-            if (!empty($user) && $user['password'] === $password) {
+            if (!empty($user) && password_verify($password, $user['password'])) {
                 $this->session->regenerate_on_login();
                 $this->session->set_userdata([
                     'id' => $user['id'],
