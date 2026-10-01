@@ -23,4 +23,5 @@ class UserModel extends Model {
             ->where('username', $username)
             ->get();
     }
+
 }

@@ -167,7 +167,7 @@
             <div class="logo">Lava<span>Lust</span></div>
             <div class="nav-links">
                 <a href="<?=site_url('');?>" class="active">Home</a>
-                <a href="<?=site_url('profile');?>">Profile</a>
+                <a href="<?=site_url('student_profile');?>">Profile</a>
                 <a href="<?=site_url('show-users');?>">Users</a>
             </div>
         </div>
