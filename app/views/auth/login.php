@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in | LavaLust</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root { --red: #dc2626; --red-dark: #b91c1c; --ink: #0a0a0a; --line: #27272a; --muted: #a1a1aa; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; } [v-cloak] { display: none; }
         body { min-height: 100vh; background: var(--ink); color: #fff; font-family: 'Inter', sans-serif; line-height: 1.6; }
         .shell { min-height: 100vh; display: grid; grid-template-rows: 64px 1fr; }
         nav { border-bottom: 1px solid #1f1f1f; padding: 0 2rem; }
@@ -34,16 +35,14 @@
     </style>
 </head>
 <body>
-    <div class="shell">
+    <div id="app" class="shell" v-cloak>
         <nav><div class="nav-inner"><div class="logo">Lava<span>Lust</span></div><a class="back" href="<?= site_url('/login'); ?>">Secure access</a></div></nav>
         <main>
             <section class="login-wrap">
                 <div class="eyebrow">Hallo</div>
                 <h1>Welcome back.</h1>
                 <p class="intro">Sign in to manage your product workspace.</p>
-                <?php if (!empty($error)): ?>
-                    <div class="error" role="alert"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></div>
-                <?php endif; ?>
+                <div v-if="error" class="error" role="alert">{{ error }}</div>
                 <form action="<?= site_url('/login'); ?>" method="post">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" autocomplete="username" required>
@@ -54,5 +53,12 @@
             </section>
         </main>
     </div>
+    <script>
+        Vue.createApp({
+            data: () => ({
+                error: <?= json_encode($error ?? '', JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>
+            })
+        }).mount('#app');
+    </script>
 </body>
 </html>
